@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { LoginComponent } from './shared/components/login/login.component';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
-
+import { AuthService } from './shared/services/auth.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

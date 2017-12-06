@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
+import { AuthService } from '../../services/auth.service';
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 @Component({
@@ -9,12 +10,13 @@ const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  private hide: Boolean = true;
-  private loginForm: FormGroup;
-  private email: FormControl;
-  private password: FormControl;
+  hide: Boolean = true;
+  floatLabel = 'always';
+  login: FormGroup;
+  email: FormControl;
+  password: FormControl;
 
-  constructor() { }
+  constructor(private _auth: AuthService) { }
 
   ngOnInit() {
     this.email = new FormControl('', [
@@ -24,10 +26,26 @@ export class LoginComponent implements OnInit {
       this.password = new FormControl('', [
         Validators.required
       ]);
-      this.loginForm = new FormGroup({
+      this.login = new FormGroup({
         email: this.email,
         password: this.password
       });
   }
 
+  isValidEmail() {
+    return this.email.valid || this.email.untouched;
+  }
+
+  isValidPassword() {
+    return this.password.valid || this.password.untouched;
+  }
+
+  onSubmit(values): void {
+    if (this.login.valid) {
+      console.log(values);
+    }else {
+      console.log('error');
+    }
+  }
 }
+

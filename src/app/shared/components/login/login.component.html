@@ -1,11 +1,31 @@
-<form [formGroup]="loginForm"  novalidate>
-  <mat-form-field >
-    <input formControlName="email" type="email" name="email" matInput placeholder="Email Id" [formControl]="emailFormControl" floatPlaceholder="'never'">
-    <mat-hint align="start"><strong>whocares@whynot.com</strong></mat-hint>
-  </mat-form-field>
-  <mat-form-field >
-    <input formControlName="password" name="password" [type]="hide ? 'password' : 'text'" matInput placeholder="Your Password">
-    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-    <mat-hint align="start"><strong>make a strong p***word dumb ass</strong> </mat-hint>
-  </mat-form-field>
-</form>
+<div class="center_div">
+  <mat-card>
+  <mat-card-header>
+    <mat-card-title><strong>Login</strong></mat-card-title>
+  </mat-card-header>
+  <form [formGroup]="login" (ngSubmit)="onSubmit(login.value)" novalidate>
+    <mat-card-content>
+      <mat-form-field [floatLabel]=floatLabel>
+        <input formControlName="email" matInput placeholder="Email">
+        <mat-error *ngIf="!isValidEmail() && login.controls.email.errors?.required">
+            Please enter an email address
+          </mat-error>
+        <mat-error *ngIf="!isValidEmail() && login.controls.email.errors?.pattern">
+            Please enter a valid email address
+          </mat-error>
+      </mat-form-field>
+      <mat-form-field [floatLabel]=floatLabel>
+        <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" placeholder="Password">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        <mat-error *ngIf="!isValidPassword() && login.controls.password.errors?.required">
+            Please enter a password
+          </mat-error>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button type="submit">Submit</button>
+      <button mat-raised-button><a [routerLink]="['/']">Register</a></button>
+    </mat-card-actions>
+  </form>
+  </mat-card>
+</div>
