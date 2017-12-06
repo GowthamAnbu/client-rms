@@ -1,0 +1,11 @@
+<form [formGroup]="loginForm"  novalidate>
+  <mat-form-field >
+    <input formControlName="email" type="email" name="email" matInput placeholder="Email Id" [formControl]="emailFormControl" floatPlaceholder="'never'">
+    <mat-hint align="start"><strong>whocares@whynot.com</strong></mat-hint>
+  </mat-form-field>
+  <mat-form-field >
+    <input formControlName="password" name="password" [type]="hide ? 'password' : 'text'" matInput placeholder="Your Password">
+    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+    <mat-hint align="start"><strong>make a strong p***word dumb ass</strong> </mat-hint>
+  </mat-form-field>
+</form>
